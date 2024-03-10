@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 """
-Custom base class for the entire project
+Defines BaseModel class
 """
-
+import models
 from uuid import uuid4
 from datetime import datetime
-import models
 
 class BaseModel:
-    """Custom base for all the classes in the AirBnb console project
+    """Represents BaseModel of the AirBnb console project
 
     Arttributes:
         id(str): handles unique user identity
@@ -24,19 +23,17 @@ class BaseModel:
     """
 
     def __init__(self, *args, **kwargs):
-        """Public instance artributes initialization
-        after creation
+        """Initialize a new BaseModel.
 
         Args:
-            *args(args): arguments
-            **kwargs(dict): attrubute values
-
+            *args(any): Unused
+            **kwargs(dict): attrubute key/value
         """
         DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
         if not kwargs:
             self.id = str(uuid4())
-            self.created_at = datetime.utcnow()
-            self.updated_at = datetime.utcnow()
+            self.created_at = datetime.today()
+            self.updated_at = datetime.today()
             models.storage.new(self)
         else:
             for key, value in kwargs.items():
@@ -50,29 +47,28 @@ class BaseModel:
 
     def __str__(self):
         """
-        Returns string representation of the class
+        Returns string representation of the BaseModel
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__,
+        class_name = self.__class__.__name__
+        return "[{}] ({}) {}".format(class_name,
                                      self.id, self.__dict__)
 
     def save(self):
         """
-        Updates the public instance attribute:
-        'updated_at' - with the current datetime
+        Updates 'updated_at' - with the current datetime
         """
-        self.updated_at = datetime.utcnow()
+        self.updated_at = datetime.today()
         models.storage.save()
 
     def to_dict(self):
         """
-        Method returns a dictionary containing all 
-        keys/values of __dict__ instance
+        Returns the dictionary of the BaseModel instance.
+
+        Includes keys/value of __dict__ instance
         """
-        map_objects = {}
-        for key, value in self.__dict__.items():
-            if key == "created_at" or key == "updated_at":
-                map_objects[key] = value.isoformat()
-            else:
-                map_objects[key] = value
-        map_objects["__class__"] = self.__class__.__name__
-        return map_objects
+        dict = {**self.__dict__}
+        dict['__class__'] = type(self).__name__
+        dict['created_at'] = dict['created_at'].isoformat()
+        dict['updated_at'] = dict['updated_at'].isoformat()
+
+        return dict
