@@ -12,8 +12,7 @@ class HBNBCommand(cmd.Cmd):
         prompt (str): The command prompt.
     """
     
-    intro = 'Type help'
-    prompt = '(hbnb) '
+    prompt = "(hbnb) "
     
     def do_EOF(self, arg): 
         """ Handles EOF to exit program """ 
