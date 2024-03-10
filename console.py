@@ -2,7 +2,7 @@
 """
 Define HBnB console.
 """
-
+import cmd
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -12,7 +12,7 @@ class HBNBCommand(cmd.Cmd):
         prompt (str): The command prompt.
     """
     
-    intro = 'Welcome to the interpreter! Type help or ? to list commands.\n'
+    intro = 'Type help'
     prompt = '(hbnb) '
     
     def do_EOF(self, arg): 
