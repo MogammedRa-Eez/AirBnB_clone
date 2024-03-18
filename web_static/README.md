@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 0x01. AirBnB clone - Web static
 
 ## Learning Objectives:bulb:
@@ -69,3 +70,6 @@ What you should learn from this project:
 
 ### [12. Accessibility](./103-index.html)
 * Improve the page by adding Accessibility supportOpen with
+=======
+0x01. AirBnB clone - Web static
+>>>>>>> 7b28f36fdc3ac7956d7759b3cccf4dad3799380b
